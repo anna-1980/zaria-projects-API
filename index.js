@@ -1,3 +1,5 @@
+import 'dotenv/config.js'; //IIFE
+import pool from "./db/client.js";
 import express from "express";
 
 const app = express();
