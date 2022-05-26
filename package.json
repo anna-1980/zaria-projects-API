@@ -1,0 +1,21 @@
+{
+  "name": "zaria",
+  "version": "1.0.0",
+  "description": "\"Anna take on API\"",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Anna Zdyb",
+  "license": "ISC",
+  "devDependencies": {
+    "kill-port": "^2.0.0",
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
