@@ -1,4 +1,5 @@
 import asyncHandler from '../middlewares/asyncHandler.js';
+import ErrorResponse from '../utils/errorResponse.js';
 
 export const getAllProjects = asyncHandler(async (req, res, next) => res.send('GET all'));
 
