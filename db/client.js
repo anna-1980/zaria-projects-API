@@ -11,7 +11,18 @@ const pool = new Pool({
 
 pool.query('SELECT NOW()', (err, res) => {
     console.log(err, res);
-    pool.end();
+    // pool.end();
 })
+
+const newUser = {
+    first_name: 'Anna',
+    last_name: 'Happy',
+    age: 42,
+};
+pool.query(`INSERT INTO users (first_name, last_name, age) VALUES ('${newUser.last_name}', '${newUser.first_name}', ${newUser.age});`,
+(err, res) => {
+    console.log(err, res);
+}
+)
 
 export default pool;
