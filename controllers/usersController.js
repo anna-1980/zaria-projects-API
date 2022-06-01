@@ -32,9 +32,11 @@ export const signin = asyncHandler(async (req, res) => {
     const match = await bcrypt.compare(password, hash);
     if (!match) throw new ErrorResponse("password is not correct", 401)
     console.log(match);
-    const token = jwt.sign({ _id, userName}, process.env.JWT_SECRET)
+    const token = jwt.sign({ _id, userName}, process.env.JWT_SECRET, {expiresIn: 3600})
     res.json({token})
 });
+
+
 export const getme = asyncHandler(async (req, res) => {
-    res.send('User / Profile')
+    res.json(req.user)
 });
