@@ -11,12 +11,9 @@ export const signup = asyncHandler(async (req, res) => {  // there is access to 
     if(!name || !email || !password){
         throw new ErrorResponse('Name Email and Password are required', 400)
     }
-    
-    const found = await User.findOne({email});
+    const found = await User.findOne({email});  //check if the user exists in the database against email, so no 2 users with same email address allowed
     console.log(`Logging user email ${found}`)
-    
     if(found) throw new ErrorResponse('user already exixts', 403);
-    
     const hash = await bcrypt.hash(password, 10); 
     const {_id, name: userName } = await User.create({ name, email, password: hash}); // it is async , returns a promise and after fulfilling the promise the value f goea into newUser
         // console.log(newUser)
@@ -25,8 +22,18 @@ export const signup = asyncHandler(async (req, res) => {  // there is access to 
     
     res.json({token})
 });
+
+
 export const signin = asyncHandler(async (req, res) => {
-    res.send('Sign In')
+    const { body: { email, password} } = req;
+    if(!email || !password){throw new ErrorResponse('Email and Password are required', 400)}
+    const { _id, name: userName, password: hash} = await User.findOne({email}).select('+password') || {};  //check if the user exists in the database select used to add password , pull it from DB
+    if (!_id) throw new ErrorResponse('User or Password does not exist', 404)
+    const match = await bcrypt.compare(password, hash);
+    if (!match) throw new ErrorResponse("password is not correct", 401)
+    console.log(match);
+    const token = jwt.sign({ _id, userName}, process.env.JWT_SECRET)
+    res.json({token})
 });
 export const getme = asyncHandler(async (req, res) => {
     res.send('User / Profile')
