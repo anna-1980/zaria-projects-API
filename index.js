@@ -10,7 +10,7 @@ import errorHandler from './middlewares/errorHandler.js';
 const app = express();
 const port = process.env.PORT || 5000
 
-app.use(express.json());
+app.use(express.json()); // takes raw data from the body of the original req. and parse it into JSON and make it available in the body of the request so we can use it
 app.use(cors({ origin: '*' }));
 
 app.use('/auth', usersRouter);
