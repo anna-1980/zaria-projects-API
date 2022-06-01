@@ -8,6 +8,10 @@ export const signup = asyncHandler(async (req, res) => {  // there is access to 
     const { body: {name, email, password} } = req;
    // console.log(name, email, password);  // use Postman to sent req. and see the outcome in the console.log
    
+    if(!name || !email || !password){
+        throw new ErrorResponse('Name Email and Password are required', 400)
+    }
+    
     const found = await User.findOne({email});
     console.log(`Logging user email ${found}`)
     
