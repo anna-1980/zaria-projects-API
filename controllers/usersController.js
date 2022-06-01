@@ -4,8 +4,10 @@ import User from '../models/userModel.js';
 
 export const signup = asyncHandler(async (req, res) => {  // there is access to body hier because of the middleware in index.js -  app.use(express.json());
     const { body: {name, email, password} } = req;
-    console.log(name, email, password);  // use Postman to sent req. and see the outcome in the console.log
-
+   // console.log(name, email, password);  // use Postman to sent req. and see the outcome in the console.log
+    const newUser = await User.create({ name, email, password}); // it is async , returns a promise and after fulfilling the promise the value f goea into newUser
+    console.log(newUser)
+    console.log(newUser)
     res.send('Sign Up')
 });
 export const signin = asyncHandler(async (req, res) => {
