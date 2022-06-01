@@ -14,10 +14,10 @@ export const signup = asyncHandler(async (req, res) => {  // there is access to 
     if(found) throw new ErrorResponse('user already exixts', 403);
     
     const hash = await bcrypt.hash(password, 10); 
-    const newUser = await User.create({ name, email, password: hash}); // it is async , returns a promise and after fulfilling the promise the value f goea into newUser
+    const {_id, name: userName } = await User.create({ name, email, password: hash}); // it is async , returns a promise and after fulfilling the promise the value f goea into newUser
         // console.log(newUser)
         console.log(process.env.JWT_SECRET)
-    const token = jwt.sign(newUser, process.env.JWT_SECRET)
+    const token = jwt.sign({_id, userName}, process.env.JWT_SECRET)
     
     res.json({token})
 });

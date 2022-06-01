@@ -17,7 +17,8 @@ app.use(cors({ origin: '*' }));
 
 app.get('/profile', verifyToken, (req, res) => {
     const token = jwt.sign({name: 'Anna'}, process.env.JWT_SECRET);
-    res.send("welcome user")
+    const { user: {name}} = req;
+    res.send(`welcome user ${name}`)
 });
 
 app.use('/auth', usersRouter);
