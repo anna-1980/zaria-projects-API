@@ -8,10 +8,18 @@ import cors from 'cors';
 import usersRouter from './routes/usersRouter.js';
 import projectsRouter from './routes/projectsRouter.js';
 import errorHandler from './middlewares/errorHandler.js';
+import uploadRouter from './routes/uploadRouter.js';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const publicDir = join(__dirname, 'public/uploads');
 
 const app = express();
 const port = process.env.PORT || 5000
 
+app.use(express.static(publicDir));
 app.use(express.json()); // takes raw data from the body of the original req. and parse it into JSON and make it available in the body of the request so we can use it
 app.use(cors({ origin: '*' }));
 
@@ -24,6 +32,7 @@ app.get('/profile', verifyToken, (req, res) => {
 //main resource endpoints
 app.use('/api/auth', usersRouter);
 app.use('/api/projects', projectsRouter);
+app.use('/api/uploads', uploadRouter);
 app.use('*', (req, res) => res.send("Zaria's Scratch projects API"));
 app.use(errorHandler);
 
