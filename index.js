@@ -21,8 +21,9 @@ app.get('/profile', verifyToken, (req, res) => {
     res.send(`welcome user ${name}`)
 });
 
-app.use('/auth', usersRouter);
-app.use('/projects', projectsRouter);
+//main resource endpoints
+app.use('/api/auth', usersRouter);
+app.use('/api/projects', projectsRouter);
 app.use('*', (req, res) => res.send("Zaria's Scratch projects API"));
 app.use(errorHandler);
 

@@ -4,8 +4,8 @@ import verifyToken from '../middlewares/verifyToken.js';
 
 const projectsRouter = Router();
 
-projectsRouter.route('/').get(getAllProjects).post(verifyToken, createProject);
+projectsRouter.route('/').get(getAllProjects).post(verifyToken, createProject);  //protected route to .post createProject
 
-projectsRouter.route('/:id').get(getSingleProject).put(updateProject).delete(deleteProject);
+projectsRouter.route('/:id').get(getSingleProject).put(verifyToken, updateProject).delete( verifyToken, deleteProject);
 
 export default projectsRouter;

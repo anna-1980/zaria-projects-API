@@ -32,7 +32,7 @@ export const signin = asyncHandler(async (req, res) => {
     const match = await bcrypt.compare(password, hash);
     if (!match) throw new ErrorResponse("password is not correct", 401)
     console.log(match);
-    const token = jwt.sign({ _id, userName}, process.env.JWT_SECRET, {expiresIn: 3600})
+    const token = jwt.sign({ _id, userName}, process.env.JWT_SECRET, {expiresIn: 18000})
     res.json({token})
 });
 
