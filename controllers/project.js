@@ -15,8 +15,7 @@ export const createProject = asyncHandler(async (req, res) => {
         ...body, author: _id
     });
 
-    console.log(newProject)
-    // console.log(title, description, url, author)
+    // console.log(newProject)
     res.json(newProject)});
 
 export const getSingleProject = asyncHandler(async (req, res) => {
