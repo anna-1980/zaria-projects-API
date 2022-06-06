@@ -8,7 +8,7 @@ export const projectCreate = Joi.object({
       'string.null': 'Title cannot be empty',
       
     }),
-    // description: Joi.string().min(10).required(),
+    description: Joi.string().min(10).required(),
     url:Joi.string().uri().required().messages({
         'string.base': 'enter valid URL',
         'string.empty': 'enter valid URL',
